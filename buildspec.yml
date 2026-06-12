@@ -1,13 +1,19 @@
 version: 0.2
 
 phases:
+
   install:
     commands:
-      - rm -f /usr/local/bin/chromedriver || true
       - java -version
       - mvn -version
 
   build:
     commands:
-      - mvn clean install
-      - mvn exec:java -Dexec.mainClass=OpenAmazon
+      - mvn clean test
+
+reports:
+  selenium-report:
+    files:
+      - TEST-*.xml
+    base-directory: target/surefire-reports
+    file-format: JUNITXML
