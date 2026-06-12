@@ -3,10 +3,21 @@ version: 0.2
 phases:
   install:
     commands:
-      - rm -f /usr/local/bin/chromedriver || true
-      - google-chrome --version || true
+      - echo "=== JAVA ==="
       - java -version
+
+      - echo "=== MAVEN ==="
       - mvn -version
+
+      - echo "=== CHROME ==="
+      - google-chrome --version || true
+
+      - echo "=== CHROMEDRIVER ==="
+      - which chromedriver || true
+      - chromedriver --version || true
+
+      - echo "=== ALL CHROMEDRIVERS ==="
+      - find / -name chromedriver 2>/dev/null || true
 
   build:
     commands:
