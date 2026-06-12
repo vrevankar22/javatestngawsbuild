@@ -1,19 +1,19 @@
 version: 0.2
 
 phases:
-
   install:
+    runtime-versions:
+      java: corretto17
     commands:
-      - java -version
-      - mvn -version
+      - yum update -y
+      - yum install -y wget
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+      - yum localinstall -y google-chrome-stable_current_x86_64.rpm
 
   build:
     commands:
       - mvn clean test
 
-reports:
-  selenium-report:
-    files:
-      - TEST-*.xml
-    base-directory: target/surefire-reports
-    file-format: JUNITXML
+artifacts:
+  files:
+    - target/**/*
